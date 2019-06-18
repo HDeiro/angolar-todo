@@ -1,0 +1,60 @@
+
+# Created by https://www.gitignore.io/api/angular
+# Edit at https://www.gitignore.io/?templates=angular
+
+### Angular ###
+## Angular ##
+# compiled output
+*/dist
+*/tmp
+*/app/**/*.js
+*/app/**/*.js.map
+
+# dependencies
+*/node_modules
+*/bower_components
+
+# IDEs and editors
+*/.idea
+
+# misc
+*/.sass-cache
+*/connect.lock
+*/coverage/*
+*/libpeerconnection.log
+*/npm-debug.log
+*/testem.log
+*/typings
+
+# e2e
+*/e2e/*.js
+*/e2e/*.map
+
+#System Files
+*/.DS_Store
+
+# End of https://www.gitignore.io/api/angular
+
+
+# Created by https://www.gitignore.io/api/go
+# Edit at https://www.gitignore.io/?templates=go
+
+### Go ###
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+### Go Patch ###
+*/vendor/
+*/Godeps/
+
+# End of https://www.gitignore.io/api/go
