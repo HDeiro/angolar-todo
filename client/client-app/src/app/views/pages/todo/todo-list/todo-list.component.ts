@@ -8,6 +8,15 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent {
+  cardModel = {
+    title: 'A fantastic card title',
+    content: 'A fantastic card content<br/>:)',
+    createdAt: new Date(),
+    author: {
+      name: 'Hugo'
+    }
+  }
+
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {

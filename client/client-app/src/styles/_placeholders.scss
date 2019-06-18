@@ -1,0 +1,9 @@
+%display-flex {
+    display: flex;
+}
+
+%display-flex-aic-jcsb {
+    @extend %display-flex;
+    align-items: center;
+    justify-content: space-between;
+}

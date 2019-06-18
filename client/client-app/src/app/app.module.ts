@@ -8,19 +8,21 @@ import { MainComponent } from './views/main/main.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule } from '@angular/material';
 import { TodoListComponent } from './views/pages/todo/todo-list/todo-list.component';
-import { RouterModule, Routes } from '@angular/router';
 import { RouteService } from './services/route.service';
+import { TodoComponent } from './components/todo/todo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    TodoListComponent
+    TodoListComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    RouteService.listRoutes(),
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -29,8 +31,7 @@ import { RouteService } from './services/route.service';
     MatListModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule,
-    RouteService.listRoutes()
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

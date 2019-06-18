@@ -1,0 +1,15 @@
+@import '../../../styles/placeholders';
+
+.app-todo::ng-deep {
+    .mat-card-header-text {
+        width: 100%;
+        margin: 0;
+    }
+    .mat-card-title {
+        @extend %display-flex-aic-jcsb;
+    }
+    .mat-card-footer {
+        @extend %display-flex-aic-jcsb;
+        padding: 16px;
+    }
+}
