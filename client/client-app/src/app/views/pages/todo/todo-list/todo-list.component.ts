@@ -10,7 +10,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 export class TodoListComponent {
   cardModel = {
     title: 'A fantastic card title',
-    content: 'A fantastic card content<br/>:)',
+    content: 'A fantastic card content<br/><b>:)</b>',
     createdAt: new Date(),
     author: {
       name: 'Hugo'

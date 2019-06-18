@@ -10,13 +10,15 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { TodoListComponent } from './views/pages/todo/todo-list/todo-list.component';
 import { RouteService } from './services/route.service';
 import { TodoComponent } from './components/todo/todo.component';
+import { EnsurePipe } from './pipes/ensure.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     TodoListComponent,
-    TodoComponent
+    TodoComponent,
+    EnsurePipe
   ],
   imports: [
     BrowserModule,
