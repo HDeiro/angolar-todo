@@ -8,6 +8,7 @@
           <button mat-icon-button 
             class="more-button" 
             [matMenuTriggerFor]="menu" 
+            [disabled]="!model.options?.length"
             aria-label="Toggle menu">
             <mat-icon>more_vert</mat-icon>
           </button>
@@ -24,7 +25,7 @@
     </mat-card-header>
 
     <mat-card-content class="dashboard-card-content"
-      [innerHtml]="model.content | ensure: 'html'">
+      [innerHtml]="model.content | ensure: 'html' | maxlength:100">
     </mat-card-content>
 
     <mat-card-footer>

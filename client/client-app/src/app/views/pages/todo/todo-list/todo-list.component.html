@@ -1,3 +1,10 @@
-<div class="grid-container">
-  <app-todo *ngFor="let card of cards | async" [model]="card"></app-todo>
+<div class="container">
+  <mat-form-field class="example-full-width">
+    <input matInput [(ngModel)]="filter"
+      [placeholder]="filter ? 'Filter' : 'Looking for something?'">
+  </mat-form-field>
+
+  <div class="card-container">
+    <app-todo *ngFor="let card of filterCards()" [model]="card"></app-todo>
+  </div>
 </div>

@@ -11,8 +11,6 @@ export class TodoComponent implements OnInit {
   
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.model)
-  }
+  ngOnInit() { }
 
 }
