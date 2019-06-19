@@ -1,9 +1,3 @@
 <div class="grid-container">
-  <app-todo [model]="cardModel"></app-todo> <br>
-  <!--<h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-    
-    </mat-grid-tile>
-  </mat-grid-list>-->
+  <app-todo *ngFor="let card of cards | async" [model]="card"></app-todo>
 </div>

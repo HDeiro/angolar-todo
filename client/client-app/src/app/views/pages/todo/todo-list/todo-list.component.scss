@@ -1,21 +1,19 @@
+@import '../../../../../styles/constants';
+@import '../../../../../styles/placeholders';
+
+$container-padding: 20px;
+$margin-between-elements: 5px;
+
+app-todo {
+  width: calc(100% * 1/2 - #{$margin-between-elements} * 2);
+  margin: $margin-between-elements;
+
+  @media(max-width: $width-to-responsive) {
+    width: 100%;
+  }
+}
+
 .grid-container {
-  margin: 20px;
-}
-
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-}
-
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-}
-
-.dashboard-card-content {
-  text-align: center;
+  @extend %display-flex-aic-jcc-fww;
+  padding: $container-padding;
 }
