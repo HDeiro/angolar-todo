@@ -14,7 +14,17 @@ export class TodoListComponent {
     createdAt: new Date(),
     author: {
       name: 'Hugo'
-    }
+    },
+    options: [
+      {
+        label: 'Remove',
+        callback: _ => console.log('Removed card')
+      },
+      {
+        label: 'Make it private',
+        callback: _ => console.log('Privating Card')
+      }
+    ]
   }
 
   /** Based on the screen size, switch from standard to one column per row */

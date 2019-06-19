@@ -13,8 +13,11 @@
           </button>
 
           <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item>Expand</button>
-            <button mat-menu-item>Remove</button>
+            <button mat-menu-item 
+              *ngFor="let option of model.options"
+              (click)="option.callback()">
+              {{option.label}}
+            </button>
           </mat-menu>
         </span>
       </mat-card-title>
