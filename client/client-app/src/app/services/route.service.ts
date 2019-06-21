@@ -23,7 +23,7 @@ export class RouteService {
   }
 
   static separate(...items) {
-    const separator = `&#9679;`;
-    return items.join(`&nbsp;&nbsp;${separator}&nbsp;&nbsp;`);
+    const separator = `   |   `;
+    return items.join(`${separator}`);
   }
 }

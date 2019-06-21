@@ -4,12 +4,13 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
 
-    <mat-toolbar>
-      Menu
+    <mat-toolbar class="logo">
+      <img src="assets/images/angolar.png" alt="Logo">
     </mat-toolbar>
 
     <mat-nav-list>
-      <a mat-list-item routerLink="/todo">To Dos</a>
+      <a class="menu-item" mat-list-item routerLink="/todo" routerLinkActive="active-route">To Dos</a>
+      <a class="menu-item" mat-list-item >To Dos</a>
     </mat-nav-list>
   </mat-sidenav>
 
