@@ -16,9 +16,14 @@ export class RouteService {
         component: TodoListComponent,
         data: {
           pageName: 'To do',
-          pageTitle: 'AnGolar | To do'
+          pageTitle: RouteService.separate("AnGolar", "To Do")
         }
       },
     ]);
+  }
+
+  static separate(...items) {
+    const separator = `&#9679;`;
+    return items.join(`&nbsp;&nbsp;${separator}&nbsp;&nbsp;`);
   }
 }
