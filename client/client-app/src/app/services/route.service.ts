@@ -11,7 +11,14 @@ export class RouteService {
 
   static listRoutes(): ModuleWithProviders {
       return RouterModule.forRoot([
-      { path: 'todo', component: TodoListComponent },
+      {
+        path: 'todo',
+        component: TodoListComponent,
+        data: {
+          pageName: 'To do',
+          pageTitle: 'AnGolar | To do'
+        }
+      },
     ]);
   }
 }
