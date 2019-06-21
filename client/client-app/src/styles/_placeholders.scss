@@ -3,9 +3,21 @@
 }
 
 %display-flex-aic-jcsb {
+  @extend %display-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+%display-flex-aic-jcc {
+  @extend %display-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%display-flex-aifs-jcc {
     @extend %display-flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 %display-flex-aifs-jcfs-fww {

@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './views/main/main.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatInputModule } from '@angular/material';
 import { TodoListComponent } from './views/pages/todo/todo-list/todo-list.component';
 import { RouteService } from './services/route.service';
 import { TodoComponent } from './components/todo/todo.component';
 import { EnsurePipe } from './pipes/ensure.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { EnsurePipe } from './pipes/ensure.pipe';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     RouteService.listRoutes(),
     LayoutModule,
     MatToolbarModule,
@@ -33,7 +35,8 @@ import { EnsurePipe } from './pipes/ensure.pipe';
     MatListModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

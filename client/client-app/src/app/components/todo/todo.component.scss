@@ -1,3 +1,4 @@
+@import '../../../styles/constants';
 @import '../../../styles/placeholders';
 
 .app-todo::ng-deep {
@@ -12,4 +13,21 @@
         @extend %display-flex-aic-jcsb;
         padding: 16px;
     }
+}
+
+.app-todo-fullscreen::ng-deep {
+  @extend %display-flex-aifs-jcc;
+
+  background: $transparency-overlay;
+
+  position: absolute;
+  top: $toolbar-height;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .card-form {
+    margin-top: 25px;
+    width: 80%;
+  }
 }
