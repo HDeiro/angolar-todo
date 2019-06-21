@@ -1,19 +1,27 @@
 package main
 
 import (
-    "encoding/json"
-    "log"
-    "net/http"
-    "github.com/gorilla/mux"
+	"github.com/gorilla/mux"
+	"github.com/AAGAraujo/angolar-todo/server/app"
+	"os"
+	"fmt"
+	"net/http"
 )
 
-// função principal
 func main() {
-    router := mux.NewRouter()
-    router.HandleFunc("/user", GetUsers).Methods("GET")
-    router.HandleFunc("/user/{id}", GetUser).Methods("GET")
-    router.HandleFunc("/user/{id}", CreateUser).Methods("POST")
-    router.HandleFunc("/user/{id}", DeleteUser).Methods("DELETE")
 
-    log.Fatal(http.ListenAndServe(":8000", router))
+	router := mux.NewRouter()
+	router.Use(app.JwtAuthentication) //attach JWT auth middleware
+
+	port := os.Getenv("PORT") //Get port from .env file, we did not specify any port so this should return an empty string when tested locally
+	if port == "" {
+		port = "8000" //localhost
+	}
+
+	fmt.Println(port)
+
+	err := http.ListenAndServe(":" + port, router) //Launch the app, visit localhost:8000/api
+	if err != nil {
+		fmt.Print(err)
+	}
 }
