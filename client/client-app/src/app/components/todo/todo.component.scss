@@ -26,8 +26,24 @@
   left: 0;
   right: 0;
 
+  mat-form-field {
+    width: 100%;
+  }
+
+  mat-card-actions {
+    padding-bottom: 8px !important;
+  }
+
+  .mat-card-header-text {
+    margin: 0;
+  }
+
   .card-form {
     margin-top: 25px;
     width: 80%;
+  }
+
+  .second-toolbar #logo { //Froala logo
+    visibility: hidden;
   }
 }

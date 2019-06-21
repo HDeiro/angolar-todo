@@ -12,6 +12,7 @@ import { RouteService } from './services/route.service';
 import { TodoComponent } from './components/todo/todo.component';
 import { EnsurePipe } from './pipes/ensure.pipe';
 import { FormsModule } from '@angular/forms';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     RouteService.listRoutes(),
     LayoutModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
