@@ -8,9 +8,14 @@
       <img src="assets/images/angolar.png" alt="Logo">
     </mat-toolbar>
 
+    <div class="filter">
+      <input placeholder="Looking for something?"
+        [(ngModel)]="filter">
+    </div>
+
     <mat-nav-list>
       <a class="menu-item"
-        *ngFor="let route of routes"
+        *ngFor="let route of getFilteredRoutes()"
         mat-list-item
         [routerLink]="route.path"
         routerLinkActive="active-route">

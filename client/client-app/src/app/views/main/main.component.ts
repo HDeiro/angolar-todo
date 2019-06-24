@@ -13,7 +13,8 @@ import { RouteService } from 'src/app/services/route.service';
 })
 export class MainComponent implements OnInit {
 
-  routes: Array<object>;
+  routes: Array<{label: string, path: string}>;
+  filter = '';
   pageTitle = 'AnGolar';
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -27,6 +28,9 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe(event => this.pageTitle = this.titleService.getTitle());
     this.routes = RouteService.getRoutes();
-    console.log(this.routes);
+  }
+
+  getFilteredRoutes() {
+    return this.routes.filter(route => route.label.toLowerCase().indexOf(this.filter.toLowerCase()) >= 0);
   }
 }

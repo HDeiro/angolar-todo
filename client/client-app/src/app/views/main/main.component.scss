@@ -50,3 +50,34 @@ mat-sidenav {
 .active-route {
   background: $theme-color;
 }
+
+.filter {
+  @extend %display-flex-aic-jcc;
+  padding-top: 12px;
+  padding-bottom: 6px;
+
+  input {
+    padding: 8px 12px;
+    border-radius: 30px;
+    border: none;
+    width: 80%;
+    font-family: $font-family;
+    background-color: $lighten-theme-color;
+    color: white;
+    transition: background-color 300ms ease-out;
+    outline: none;
+
+    &:hover {
+      background-color: $theme-color;
+    }
+
+    &::placeholder {
+      color: white;
+    }
+
+    &:focus {
+      background-color: white;
+      color: $theme-color;
+    }
+  }
+}

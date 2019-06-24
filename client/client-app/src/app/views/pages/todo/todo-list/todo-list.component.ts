@@ -35,9 +35,9 @@ export class TodoListComponent {
       map(({ matches }) => {
         return [
           this.cardModel,
-       //   this.cardModel,
-         // this.cardModel,
-          //this.cardModel
+          this.cardModel,
+          this.cardModel,
+          this.cardModel
         ];
       }
     )
