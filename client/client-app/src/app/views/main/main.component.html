@@ -9,8 +9,13 @@
     </mat-toolbar>
 
     <mat-nav-list>
-      <a class="menu-item" mat-list-item routerLink="/todo" routerLinkActive="active-route">To Dos</a>
-      <a class="menu-item" mat-list-item >To Dos</a>
+      <a class="menu-item"
+        *ngFor="let route of routes"
+        mat-list-item
+        [routerLink]="route.path"
+        routerLinkActive="active-route">
+        {{route.label}}
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 

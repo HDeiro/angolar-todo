@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { RouteService } from 'src/app/services/route.service';
 
 @Component({
   selector: 'app-main',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class MainComponent implements OnInit {
 
+  routes: Array<object>;
   pageTitle = 'AnGolar';
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -24,5 +26,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.subscribe(event => this.pageTitle = this.titleService.getTitle());
+    this.routes = RouteService.getRoutes();
+    console.log(this.routes);
   }
 }

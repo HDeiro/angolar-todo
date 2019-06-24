@@ -22,6 +22,7 @@ import { TodoComponent } from './components/todo/todo.component';
 import { EnsurePipe } from './pipes/ensure.pipe';
 import { FormsModule } from '@angular/forms';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { UserListComponent } from './views/pages/user/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     MainComponent,
     TodoListComponent,
     TodoComponent,
-    EnsurePipe
+    EnsurePipe,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
