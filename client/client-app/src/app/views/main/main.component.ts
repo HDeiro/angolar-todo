@@ -27,7 +27,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.subscribe(event => this.pageTitle = this.titleService.getTitle());
-    this.routes = RouteService.getRoutes();
+    this.routes = RouteService.getMenuRoutes();
   }
 
   getFilteredRoutes() {

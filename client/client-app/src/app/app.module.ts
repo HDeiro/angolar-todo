@@ -29,6 +29,7 @@ import { UserListComponent } from './views/pages/user/user-list/user-list.compon
 import { HttpClientModule } from '@angular/common/http';
 import { TodoService } from './services/api/todo.service';
 import { Todo } from './models/todo.model';
+import { TodoNewComponent } from './views/pages/todo/todo-new/todo-new.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { Todo } from './models/todo.model';
     TodoComponent,
     EnsurePipe,
     MaxlengthPipe,
-    UserListComponent
+    UserListComponent,
+    TodoNewComponent
   ],
   imports: [
     BrowserModule,

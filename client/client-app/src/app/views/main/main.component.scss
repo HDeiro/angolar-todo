@@ -7,6 +7,10 @@ mat-nav-list {
 
 mat-sidenav {
   background: $darken-theme-color;
+
+  &-content {
+    background: whitesmoke;
+  }
 }
 
 .sidenav {

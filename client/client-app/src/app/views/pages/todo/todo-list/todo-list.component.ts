@@ -30,9 +30,7 @@ export class TodoListComponent implements OnInit {
     return filter ? filtered.toLowerCase().indexOf(filter.toLowerCase()) > -1 : true;
   }
 
-  async ngOnInit() {
-    this.todoService
-      .getToDos()
-      .subscribe(cards => this.cards = cards);
+  ngOnInit() {
+    this.todoService.getToDos().subscribe(cards => this.cards = cards);
   }
 }
