@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Todo } from 'src/app/models/todo.model';
 
 @Component({
   selector: 'app-todo',
@@ -7,8 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TodoComponent implements OnInit {
 
-  @Input('model') model: object;
-  editableModel: object;
+  @Input('model') model: Todo;
+  editableModel: Todo;
   isFullscreenModeActivated: boolean = false;
 
   constructor() { 
@@ -22,5 +23,8 @@ export class TodoComponent implements OnInit {
   toggleFullscreenMode() {
     this.editableModel = this.model;
     this.isFullscreenModeActivated = !this.isFullscreenModeActivated;
+    
+    if(!this.isFullscreenModeActivated)
+      this.editableModel = null;
   }
 }

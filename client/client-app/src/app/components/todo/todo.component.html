@@ -9,16 +9,16 @@
             (click)="$event.stopPropagation()"
             class="more-button"
             [matMenuTriggerFor]="menu"
-            [disabled]="!model.options?.length"
+            [disabled]="!model.actions?.length"
             aria-label="Toggle menu">
             <mat-icon>more_vert</mat-icon>
           </button>
 
           <mat-menu #menu="matMenu" xPosition="before">
             <button mat-menu-item
-              *ngFor="let option of model.options"
-              (click)="option.callback()">
-              {{option.label}}
+              *ngFor="let action of model.actions"
+              (click)="action.callback()">
+              {{action.label}}
             </button>
           </mat-menu>
         </span>
@@ -56,7 +56,7 @@
     </mat-card-content>
 
     <mat-card-actions align="end">
-        <button mat-raised-button>Cancel</button>
+        <button mat-raised-button (click)="toggleFullscreenMode()">Cancel</button>
         <button mat-raised-button color="primary">Save</button>
     </mat-card-actions>
   </mat-card>

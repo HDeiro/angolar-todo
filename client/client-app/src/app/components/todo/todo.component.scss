@@ -5,6 +5,7 @@
     mat-card {
         padding-bottom: 22px;
         height: 135px;
+        cursor: pointer;
     }
     .mat-card-content {
         padding-bottom: 2px; // Fix to text-crop on overflow hiding
@@ -31,6 +32,7 @@
 .app-todo-fullscreen::ng-deep {
   @extend %display-flex-aifs-jcc;
 
+  z-index: 99;
   background: $transparency-overlay;
 
   position: absolute;

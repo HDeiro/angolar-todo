@@ -1,79 +1,20 @@
-import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Component, OnInit } from '@angular/core';
+import { TodoService } from 'src/app/services/api/todo.service';
+import { Todo } from 'src/app/models/todo.model';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent {
+export class TodoListComponent implements OnInit {
 
   filter: string;
-  cards = [
-    {
-      title: 'A fantastic card title',
-      content: 'A fantastic card content<br/><b>:)</b>',
-      createdAt: new Date(),
-      author: {
-        name: 'Hugo'
-      },
-      options: [
-        {
-          label: 'Remove',
-          callback: _ => console.log('Removed card')
-        },
-        {
-          label: 'Make it private',
-          callback: _ => console.log('Privating Card')
-        }
-      ]
-    },
-    {
-      title: 'Learning Angular',
-      content: 'Learning <i>angular</i><br/><b>:)</b>',
-      createdAt: new Date(),
-      author: {
-        name: 'Hugo'
-      },
-      options: [
-        {
-          label: 'Remove',
-          callback: _ => console.log('Removed card')
-        },
-        {
-          label: 'Make it private',
-          callback: _ => console.log('Privating Card')
-        }
-      ]
-    },
-    {
-      title: 'Learning Go',
-      content: 'Learning <i>GO</i><br/><b>:)</b>',
-      createdAt: new Date(),
-      author: {
-        name: 'Hugo'
-      },
-      options: [
-        {
-          label: 'Remove',
-          callback: _ => console.log('Removed card')
-        },
-        {
-          label: 'Make it private',
-          callback: _ => console.log('Privating Card')
-        }
-      ]
-    },
-    {
-      title: 'Creating AnGolar',
-      content: 'Creating Angolar '.repeat(100),
-      createdAt: new Date(),
-      author: {
-        name: 'Hugo'
-      }
-    }
-  ];
+  cards: Array<Todo> = [];
+
+  constructor(
+    private todoService: TodoService
+  ) {}
 
   filterCards() {
     return this.cards.filter(card => 
@@ -88,5 +29,9 @@ export class TodoListComponent {
     return filter ? filtered.toLowerCase().indexOf(filter.toLowerCase()) > -1 : true;
   }
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  async ngOnInit() {
+    this.todoService
+      .getToDos()
+      .subscribe(event => this.cards = event.map(item => new Todo(item)));
+  }
 }
