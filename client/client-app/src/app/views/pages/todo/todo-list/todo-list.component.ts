@@ -9,6 +9,7 @@ import { Todo } from 'src/app/models/todo.model';
 })
 export class TodoListComponent implements OnInit {
 
+  isInViewMode = true;
   filter: string;
   cards: Array<Todo> = [];
 
@@ -32,6 +33,6 @@ export class TodoListComponent implements OnInit {
   async ngOnInit() {
     this.todoService
       .getToDos()
-      .subscribe(event => this.cards = event.map(item => new Todo(item)));
+      .subscribe(cards => this.cards = cards);
   }
 }

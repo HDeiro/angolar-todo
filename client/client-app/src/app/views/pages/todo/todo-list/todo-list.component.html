@@ -1,10 +1,22 @@
-<div class="container">
-  <mat-form-field class="example-full-width">
-    <input matInput [(ngModel)]="filter"
-      [placeholder]="filter ? 'Filter' : 'Looking for something?'">
-  </mat-form-field>
+<div class="container" *ngIf="isInViewMode">
+  <div class="filter-container">
+    <mat-form-field class="example-full-width">
+      <input matInput [(ngModel)]="filter"
+        [placeholder]="filter ? 'Filter' : 'Looking for something?'">
+    </mat-form-field>
+    
+    <button mat-icon-button  
+      (click)="isInViewMode = false"
+      aria-label="Add a new to do">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 
   <div class="card-container">
     <app-todo *ngFor="let card of filterCards()" [model]="card"></app-todo>
   </div>
+</div>
+
+<div class="container" *ngIf="!isInViewMode">
+  CADASTRO
 </div>

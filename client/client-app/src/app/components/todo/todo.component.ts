@@ -13,11 +13,9 @@ export class TodoComponent implements OnInit {
   isFullscreenModeActivated: boolean = false;
 
   constructor() { 
-    
   }
 
-  ngOnInit() { 
-
+  ngOnInit() {
   }
 
   toggleFullscreenMode() {

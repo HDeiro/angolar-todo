@@ -30,7 +30,7 @@
     </mat-card-content>
 
     <mat-card-footer>
-      <small>Created {{model.createdAt ? 'in ' + (model.createdAt | date) : ''}} by {{model.author?.name || 'an not informed author'}}</small>
+      <small>Created {{model.createdAt ? 'in ' + (model.createdAt | date) : ''}} by {{model.author.name || 'an not informed author'}}</small>
     </mat-card-footer>
   </mat-card>
 </div>

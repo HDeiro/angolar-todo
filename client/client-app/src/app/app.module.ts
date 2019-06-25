@@ -27,6 +27,8 @@ import { MaxlengthPipe } from './pipes/maxlength.pipe';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { UserListComponent } from './views/pages/user/user-list/user-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TodoService } from './services/api/todo.service';
+import { Todo } from './models/todo.model';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    Todo
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
