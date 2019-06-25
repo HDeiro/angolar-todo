@@ -5,11 +5,11 @@ import(
 )
 
 type ToDo struct {
-	Id 				int
-	Title 			string
-	Description 	string
-	User_id 		int
-	CreateAt 		*time.Time
-	isPrivate 		bool
+	Id 				int			`json:"id"`
+	Title 			string		`json:"title"`
+	Description 	string		`json:"description"`
+	User_id 		int			`json:"user_id"`
+	CreateAt 		*time.Time	`json:"create_at"`
+	isPrivate 		bool		`json:"is_private"`
 }
 

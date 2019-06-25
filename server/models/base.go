@@ -32,7 +32,7 @@ func init() {
 	}
 
 	db = conn
-	db.Debug().AutoMigrate(&Account{}, &Contact{}) //Database migration
+	db.Debug().AutoMigrate(&ToDo{}, &User{}) //Database migration
 }
 
 //returns a handle to the DB object
