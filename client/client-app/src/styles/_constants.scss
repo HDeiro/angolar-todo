@@ -1,2 +1,12 @@
+// Color
+$theme-color: #673ab7;
+$darken-theme-color: darken(#673ab7, 15);
+$lighten-theme-color: lighten(#673ab7, 6);
+// References
 $drawer-width: 200px;
 $width-to-responsive: 870px;
+$toolbar-height: 64px;
+// Other
+$transparency-overlay: rgba($theme-color, .2);
+$font-family: Roboto, "Helvetica Neue", sans-serif;
+

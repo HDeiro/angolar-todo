@@ -5,25 +5,23 @@ import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl
   name: 'ensure'
 })
 export class EnsurePipe implements PipeTransform {
-  
+
   constructor(protected sanitizer: DomSanitizer) {}
 
   transform(value: any, type: string): SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl {
-    console.log(value, type);
     switch (type) {
-      case 'html':        
+      case 'html':
         return this.sanitizer.bypassSecurityTrustHtml(value);
-      case 'style':       
+      case 'style':
         return this.sanitizer.bypassSecurityTrustStyle(value);
-      case 'script':      
+      case 'script':
         return this.sanitizer.bypassSecurityTrustScript(value);
-			case 'url':
+      case 'url':
         return this.sanitizer.bypassSecurityTrustUrl(value);
-			case 'resourceUrl':
+      case 'resourceUrl':
         return this.sanitizer.bypassSecurityTrustResourceUrl(value);
-      default: 
+      default:
         throw new Error(`Invalid safe type specified: ${type}`);
-		}
+   }
   }
-
 }

@@ -8,9 +8,19 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TodoComponent implements OnInit {
 
   @Input('model') model: object;
-  
-  constructor() { }
+  editableModel: object;
+  isFullscreenModeActivated: boolean = false;
 
-  ngOnInit() { }
+  constructor() { 
+    
+  }
 
+  ngOnInit() { 
+
+  }
+
+  toggleFullscreenMode() {
+    this.editableModel = this.model;
+    this.isFullscreenModeActivated = !this.isFullscreenModeActivated;
+  }
 }

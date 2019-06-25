@@ -1,20 +1,21 @@
 <div class="app-todo">
-  <mat-card>
+  <mat-card (click)="toggleFullscreenMode()">
     <mat-card-header>
       <mat-card-title class="card-title">
         {{model.title}}
 
         <span class="card-menu">
-          <button mat-icon-button 
-            class="more-button" 
-            [matMenuTriggerFor]="menu" 
+          <button mat-icon-button
+            (click)="$event.stopPropagation()"
+            class="more-button"
+            [matMenuTriggerFor]="menu"
             [disabled]="!model.options?.length"
             aria-label="Toggle menu">
             <mat-icon>more_vert</mat-icon>
           </button>
 
           <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item 
+            <button mat-menu-item
               *ngFor="let option of model.options"
               (click)="option.callback()">
               {{option.label}}
@@ -31,5 +32,32 @@
     <mat-card-footer>
       <small>Created {{model.createdAt ? 'in ' + (model.createdAt | date) : ''}} by {{model.author?.name || 'an not informed author'}}</small>
     </mat-card-footer>
+  </mat-card>
+</div>
+
+<div class="app-todo-fullscreen"
+  (click)="toggleFullscreenMode()"
+  *ngIf="isFullscreenModeActivated">
+  <mat-card class="card-form"
+    (click)="$event.stopPropagation()">
+    <mat-card-header>
+      <mat-card-title>Edit card</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput
+          placeholder="Title"
+          [(ngModel)]="editableModel.title">
+      </mat-form-field>
+
+      <div [froalaEditor] [(froalaModel)]="editableModel.content"></div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <button mat-raised-button>Cancel</button>
+        <button mat-raised-button color="primary">Save</button>
+    </mat-card-actions>
   </mat-card>
 </div>
