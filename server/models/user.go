@@ -7,6 +7,7 @@ import (
 	u "github.com/AAGAraujo/angolar-todo/server/utils"
 	"golang.org/x/crypto/bcrypt"
 	"os"
+	"fmt"
 )
 
 /*
@@ -40,8 +41,9 @@ func (user *User) Validate() (map[string] interface{}, bool) {
 	temp := &User{}
 
 	//check for errors and duplicate emails
-	err := GetDB().Table("accounts").Where("email = ?", user.Email).First(temp).Error
+	err := GetDB().Table("users").Where("email = ?", user.Email).First(temp).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
+		fmt.Printf("err = %",err)
 		return u.Message(false, "Connection error. Please retry"), false
 	}
 	if temp.Email != "" {
@@ -75,7 +77,7 @@ func (user *User) Create() (map[string] interface{}) {
 	user.Password = "" //delete password
 
 	response := u.Message(true, "Account has been created")
-	response["user"] = user
+	response["user"] = user // email, nome, token, password =""
 	return response
 }
 
