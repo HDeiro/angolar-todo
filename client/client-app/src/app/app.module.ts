@@ -16,7 +16,9 @@ import {
   MatCardModule, 
   MatMenuModule, 
   MatFormFieldModule, 
-  MatInputModule 
+  MatInputModule, 
+  MatTableModule,
+  MatDialogModule
 } from '@angular/material';
 import { TodoListComponent } from './views/pages/todo/todo-list/todo-list.component';
 import { RouteService } from './services/route.service';
@@ -27,9 +29,9 @@ import { MaxlengthPipe } from './pipes/maxlength.pipe';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { UserListComponent } from './views/pages/user/user-list/user-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TodoService } from './services/api/todo.service';
 import { Todo } from './models/todo.model';
 import { TodoNewComponent } from './views/pages/todo/todo-new/todo-new.component';
+import { ConfirmationDialogComponent } from './components/dialog/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,11 @@ import { TodoNewComponent } from './views/pages/todo/todo-new/todo-new.component
     EnsurePipe,
     MaxlengthPipe,
     UserListComponent,
-    TodoNewComponent
+    TodoNewComponent,
+    ConfirmationDialogComponent
+  ],
+  entryComponents: [
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,9 @@ import { TodoNewComponent } from './views/pages/todo/todo-new/todo-new.component
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [
     Todo

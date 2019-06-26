@@ -1,8 +1,7 @@
 export class User {
 
-    name: string;
+    name: string = null;
+    email: string = null;
+    createdAt: Date = null;
 
-    constructor(name: string) {
-        this.name = name;
-    }
 }

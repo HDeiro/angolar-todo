@@ -3,11 +3,10 @@ import { TodoAction } from './todo-action.model';
 
 export class Todo {
 
-    title: string;
-    content: string;
-    author: User;
-    createdAt: Date;
-    actions: Array<TodoAction>;
-
+    title: string = null;
+    content: string = null;
+    author: User = null;
+    createdAt: Date = null;
+    actions: Array<TodoAction> = null;
     
 }

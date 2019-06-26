@@ -13,19 +13,10 @@ app-todo {
   }
 }
 
-mat-form-field {
-  margin: 0 5px;
-  width: 95%;
-}
-
 .container {
   padding: $container-padding;
 }
 
 .card-container {
   @extend %display-flex-aic-jcc-fww;
-}
-
-.filter-container {
-  @extend %display-flex-aic-jcsb;
 }

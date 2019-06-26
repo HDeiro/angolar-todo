@@ -32,7 +32,8 @@ export class TodoService {
         let todo = new Todo();
         todo.title = item.title;
         todo.content = item.content;
-        todo.author = new User(item.author.name);
+        todo.author = new User();
+        todo.author.name = item.author.name;
         todo.createdAt = new Date(item.createdAt);
         item.actions && (todo.actions = item.actions.map(action => this.getPreloadedTodoActions(todo)[action]));
         return todo;

@@ -27,3 +27,34 @@ mat-card-title, mat-card-footer {
 .second-toolbar #logo { 
   visibility: hidden;
 }
+
+.zebra-table {
+  tr:nth-child(even) {
+    background: whitesmoke !important;
+  }
+}
+
+.filter-container {
+  @extend %display-flex-aic-jcsb;
+  
+  mat-form-field {
+    margin: 0 5px;
+    width: 95%;
+  }
+}
+
+.actions {
+  button {
+      margin-top: 12px;
+      margin-left: 6px;
+  }
+}
+
+// Colors
+.color-danger {
+  color: $danger-color;
+}
+
+.display-none {
+  display: none;
+}
