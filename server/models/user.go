@@ -20,10 +20,11 @@ type Token struct {
 
 type User struct {
 	gorm.Model
+	Id			int    `json:id`
 	Name 		string `json:"name"`
 	Email 		string `json:"email"`
 	Password 	string `json:"password"`
-	Token       string `json:"token";sql:"-"`
+	Token       string `json:"token"`
 }
 
 //Validate incoming user details...
@@ -43,14 +44,24 @@ func (user *User) Validate() (map[string] interface{}, bool) {
 	//check for errors and duplicate emails
 	err := GetDB().Table("users").Where("email = ?", user.Email).First(temp).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
-		fmt.Printf("err = %",err)
+		fmt.Printf("err = %s",err)
 		return u.Message(false, "Connection error. Please retry"), false
 	}
-	if temp.Email != "" {
+	if temp.Email != "" && temp.Id != user.Id{
 		return u.Message(false, "Email address already in use by another user."), false
 	}
 
 	return u.Message(false, "Requirement passed"), true
+}
+
+func (user *User) generateToken(){
+
+	//Create new JWT token for the newly registered account
+	tk := &Token{UserId: user.ID}
+	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
+	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
+	user.Token = tokenString
+
 }
 
 func (user *User) Create() (map[string] interface{}) {
@@ -68,11 +79,7 @@ func (user *User) Create() (map[string] interface{}) {
 		return u.Message(false, "Failed to create account, connection error.")
 	}
 
-	//Create new JWT token for the newly registered account
-	tk := &Token{UserId: user.ID}
-	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
-	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
-	user.Token = tokenString
+	user.generateToken();
 
 	user.Password = "" //delete password
 
@@ -99,11 +106,7 @@ func Login(email, password string) (map[string]interface{}) {
 	//Worked! Logged In
 	user.Password = ""
 
-	//Create JWT token
-	tk := &Token{UserId: user.ID}
-	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
-	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
-	user.Token = tokenString //Store the token in the response
+	user.generateToken();
 
 	resp := u.Message(true, "Logged In")
 	resp["user"] = user
@@ -119,5 +122,49 @@ func GetUser(u uint) *User {
 	}
 
 	user.Password = ""
+	return user
+}
+
+func (user *User) Update() (map[string] interface{}) {
+
+	if resp, ok := user.Validate(); !ok {
+		return resp
+	}
+
+	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	user.Password = string(hashedPassword)
+
+	GetDB().Update(user)
+
+	if user.ID <= 0 {
+		return u.Message(false, "Failed to update account, connection error.")
+	}
+
+	user.generateToken();
+
+	user.Password = "" //delete password
+
+	response := u.Message(true, "Account has been updated")
+	response["user"] = user 
+	return response
+}
+
+func (user *User) Delete() (map[string] interface{}) {
+	
+	GetDB().Delete(user)
+
+	response := u.Message(true, "Account has been deleted")
+	response["user"] = user 
+	return response
+}
+
+
+func GetUsers() ([]*User) {
+
+	user := make([]*User, 0)
+	error := GetDB().Table("users").Find(&user).Error
+	if error != nil {
+		return nil
+	}
 	return user
 }
