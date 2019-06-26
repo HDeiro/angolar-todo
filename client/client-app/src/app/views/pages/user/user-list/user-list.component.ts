@@ -3,6 +3,8 @@ import { UserService } from 'src/app/services/api/user.service';
 import { User } from 'src/app/models/user.model';
 import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/components/dialog/confirmation-dialog/confirmation-dialog.component';
+import { LottieAnimationViewModule } from 'ng-lottie';
+import { animate } from '@angular/animations';
 
 @Component({
   selector: 'app-user-list',
@@ -16,11 +18,16 @@ export class UserListComponent implements OnInit {
   filter: string = '';
   users: Array<User> = [];
   displayedColumns = [...Object.keys(new User()), 'actions']; //Get descriptors
+  lottieConfig = {
+    path: 'assets/lotties/not-found.json',
+    renderer: 'canvas',
+    loop: true
+  };
 
   constructor(
     private userService: UserService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.userService.getUsers().subscribe(users => this.users = users);

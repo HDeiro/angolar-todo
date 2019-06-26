@@ -1,0 +1,47 @@
+<form class="container padding-content">
+  <mat-form-field class="full-width">
+    <input matInput 
+      placeholder="Nome" 
+      required
+      [(ngModel)]="userModel.name"
+      name="name">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input matInput 
+      placeholder="E-mail" 
+      required
+      [(ngModel)]="userModel.email"
+      name="email"
+      type="email">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input matInput 
+      placeholder="Password" 
+      [(ngModel)]="userModel.password"
+      name="password"
+      required
+      [type]="passwordIsHidden ? 'password' : 'text'">
+
+      <mat-icon matSuffix 
+        class="cursor-pointer"
+        (click)="passwordIsHidden = !passwordIsHidden">
+        {{passwordIsHidden ? 'lock' : 'lock_open'}}
+      </mat-icon>
+  </mat-form-field>
+
+  <div class="actions" align="right">
+    <button mat-raised-button  
+      [routerLink]="'/user'">
+      Cancel
+    </button>
+
+    <button mat-raised-button
+      type="submit" 
+      color="primary"
+      (click)="saveUser()">
+      Save
+    </button>
+  </div>
+</form>

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TodoListComponent } from '../views/pages/todo/todo-list/todo-list.component';
 import { UserListComponent } from '../views/pages/user/user-list/user-list.component';
 import { TodoNewComponent } from '../views/pages/todo/todo-new/todo-new.component';
+import { UserNewComponent } from '../views/pages/user/user-new/user-new.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,14 @@ export class RouteService {
       data: {
         pageName: 'Users',
         pageTitle: RouteService.separate("AnGolar", "User")
+      }
+    },
+    {
+      path: 'user/new',
+      component: UserNewComponent,
+      data: {
+        pageName: 'New user',
+        pageTitle: RouteService.separate("AnGolar", "User", "New")
       }
     },
   ];

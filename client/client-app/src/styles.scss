@@ -39,6 +39,7 @@ mat-card-title, mat-card-footer {
   
   mat-form-field {
     margin: 0 5px;
+  
     width: 95%;
   }
 }
@@ -55,6 +56,19 @@ mat-card-title, mat-card-footer {
   color: $danger-color;
 }
 
-.display-none {
-  display: none;
+.not-found {
+  overflow: hidden;
+
+  .message {
+    font-size: 18px;
+    text-align: center;
+
+    span {
+      color: $danger-color;
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

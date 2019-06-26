@@ -13,9 +13,8 @@ export class TodoListComponent implements OnInit {
   filter: string;
   cards: Array<Todo> = [];
 
-  constructor(
-    private todoService: TodoService
-  ) {}
+  constructor(private todoService: TodoService) {
+  }
 
   filterCards() {
     return this.cards.filter(card => 

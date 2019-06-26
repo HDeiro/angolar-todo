@@ -8,11 +8,11 @@
         <button mat-mini-fab 
           color="primary" 
           aria-label="Add a new user" 
-          [routerLink]="'/todo/new'">
+          [routerLink]="'/user/new'">
           <mat-icon>add</mat-icon>
         </button>
     </div>
-    
+
     <table mat-table [dataSource]="getUsers()" class="full-width zebra-table">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -48,11 +48,26 @@
         </ng-container>
 
         <ng-container matColumnDef="disclaimer">
-            <td mat-footer-cell
-                [ngClass]="{'display-none': !noResultsFound}"
+            <td mat-footer-cell 
+                [style.visibility]="noResultsFound ? 'visible' : 'hidden'"
                 *matFooterCellDef 
+                class="not-found"
                 [attr.colspan]="displayedColumns.length">
-                Please note that the cost of items displayed are completely and totally made up.
+                <div class="wrapper" [style.height]="noResultsFound ? '300px' : '0'">
+                    <lottie-animation-view
+                        [options]="lottieConfig"
+                        [width]="200"
+                        [height]="200">
+                    </lottie-animation-view>
+                    
+                    <h4 class="message" *ngIf="filter">
+                        Not results found for match <span>{{filter}}</span>
+                    </h4>
+                    
+                    <h4 class="message" *ngIf="!filter">
+                        There are no items to be listed
+                    </h4>
+                </div>
             </td>
         </ng-container>
          

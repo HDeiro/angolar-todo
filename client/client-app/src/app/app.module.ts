@@ -32,6 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Todo } from './models/todo.model';
 import { TodoNewComponent } from './views/pages/todo/todo-new/todo-new.component';
 import { ConfirmationDialogComponent } from './components/dialog/confirmation-dialog/confirmation-dialog.component';
+import { LottieAnimationViewModule } from 'ng-lottie';
+import { UserNewComponent } from './views/pages/user/user-new/user-new.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { ConfirmationDialogComponent } from './components/dialog/confirmation-di
     MaxlengthPipe,
     UserListComponent,
     TodoNewComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    UserNewComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent
@@ -57,6 +60,7 @@ import { ConfirmationDialogComponent } from './components/dialog/confirmation-di
     LayoutModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
+    LottieAnimationViewModule.forRoot(),
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
