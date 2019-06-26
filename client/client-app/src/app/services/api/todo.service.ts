@@ -47,4 +47,8 @@ export class TodoService {
   privatizingToDo(todo: Todo) {
     console.log('Privatizing To Do', todo); 
   }
+
+  saveTodo(todo: Todo) {
+    console.log('Save to do', todo);
+  }
 }

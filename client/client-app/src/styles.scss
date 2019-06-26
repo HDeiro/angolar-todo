@@ -18,3 +18,12 @@ mat-card-title, mat-card-footer {
 .padding-content {
   padding: 16px;
 }
+
+.full-width {
+  width: 100%;
+}
+
+// Hides Froala WYSIWYG logo
+.second-toolbar #logo { 
+  visibility: hidden;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Todo } from 'src/app/models/todo.model';
+import { TodoService } from 'src/app/services/api/todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -12,8 +13,9 @@ export class TodoComponent implements OnInit {
   editableModel: Todo;
   isFullscreenModeActivated: boolean = false;
 
-  constructor() { 
-  }
+  constructor(
+    private todoService: TodoService
+  ) { }
 
   ngOnInit() {
   }
@@ -24,5 +26,9 @@ export class TodoComponent implements OnInit {
     
     if(!this.isFullscreenModeActivated)
       this.editableModel = null;
+  }
+
+  saveTodo() {
+    this.todoService.saveTodo(this.editableModel);
   }
 }
