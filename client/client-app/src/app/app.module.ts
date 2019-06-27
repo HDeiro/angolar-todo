@@ -7,9 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './views/main/main.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { 
-  MatToolbarModule,
   MatButtonModule, 
-  MatSidenavModule, 
   MatIconModule, 
   MatListModule, 
   MatGridListModule, 
@@ -34,6 +32,7 @@ import { TodoNewComponent } from './views/pages/todo/todo-new/todo-new.component
 import { ConfirmationDialogComponent } from './components/dialog/confirmation-dialog/confirmation-dialog.component';
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { UserNewComponent } from './views/pages/user/user-new/user-new.component';
+import { MainModule } from './views/main/main.module';
 
 @NgModule({
   declarations: [
@@ -61,9 +60,7 @@ import { UserNewComponent } from './views/pages/user/user-new/user-new.component
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     LottieAnimationViewModule.forRoot(),
-    MatToolbarModule,
     MatButtonModule,
-    MatSidenavModule,
     MatIconModule,
     MatListModule,
     MatGridListModule,
@@ -74,7 +71,8 @@ import { UserNewComponent } from './views/pages/user/user-new/user-new.component
     FormsModule,
     HttpClientModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MainModule
   ],
   providers: [
     Todo
