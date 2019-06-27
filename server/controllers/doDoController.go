@@ -1,47 +1,46 @@
 package controllers
 
-import(
-	"net/http"
+import (
 	"encoding/json"
+	"net/http"
+	"strconv"
+
 	"github.com/AAGAraujo/angolar-todo/server/models"
 	u "github.com/AAGAraujo/angolar-todo/server/utils"
 	"github.com/gorilla/mux"
-	"strconv"
 )
 
-var CreateToDo = func(w http.ResponseWriter, r *http.Request){
+var CreateToDo = func(w http.ResponseWriter, r *http.Request) {
 
 	toDo := &models.ToDo{}
 
 	err := json.NewDecoder(r.Body).Decode(toDo)
 
 	if err != nil {
-		u.Respond(w, u.Message(false, "Erro while decoding request body"))
+		u.Respond(w, u.Message(false, "Erro while decoding request body"), http.StatusBadRequest)
 		return
 	}
 
 	resp := toDo.Create()
 
-	w.WriteHeader(http.StatusCreated)
-	u.Respond(w,resp)
-	
+	u.Respond(w, resp, http.StatusCreated)
+
 }
 
 var UpdateToDo = func(w http.ResponseWriter, r *http.Request) {
 
 	toDo := &models.ToDo{}
-	
+
 	err := json.NewDecoder(r.Body).Decode(toDo)
 
 	if err != nil {
-		u.Respond(w, u.Message(false, "Erro while decoding request body"))
+		u.Respond(w, u.Message(false, "Erro while decoding request body"), http.StatusBadGateway)
 		return
 	}
 
 	resp := toDo.Update()
 
-	w.WriteHeader(http.StatusAccepted)
-	u.Respond(w,resp)
+	u.Respond(w, resp, http.StatusAccepted)
 
 }
 
@@ -52,17 +51,15 @@ var DeleteToDo = func(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(toDo)
 
 	if err != nil {
-		u.Respond(w, u.Message(false, "Erro while decoding request body"))
+		u.Respond(w, u.Message(false, "Erro while decoding request body"), http.StatusBadRequest)
 		return
 	}
 
 	resp := toDo.Delete()
 
-	w.WriteHeader(http.StatusAccepted)
-	u.Respond(w,resp)
+	u.Respond(w, resp, http.StatusAccepted)
 
 }
-
 
 var GetToDos = func(w http.ResponseWriter, r *http.Request) {
 
@@ -70,9 +67,8 @@ var GetToDos = func(w http.ResponseWriter, r *http.Request) {
 	response := u.Message(true, "success")
 	response["data"] = result
 
-	w.WriteHeader(http.StatusOK)
-	u.Respond(w, response)
-	
+	u.Respond(w, response, http.StatusOK)
+
 }
 
 var GetToDo = func(w http.ResponseWriter, r *http.Request) {
@@ -81,7 +77,7 @@ var GetToDo = func(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(params["id"])
 	if err != nil {
 		//The passed path parameter is not an integer
-		u.Respond(w, u.Message(false, "There was an error in your request"))
+		u.Respond(w, u.Message(false, "There was an error in your request"), http.StatusBadRequest)
 		return
 	}
 
@@ -89,7 +85,6 @@ var GetToDo = func(w http.ResponseWriter, r *http.Request) {
 	response := u.Message(true, "success")
 	response["data"] = result
 
-	w.WriteHeader(http.StatusOK)
-	u.Respond(w, response)
-	
+	u.Respond(w, response, http.StatusOK)
+
 }

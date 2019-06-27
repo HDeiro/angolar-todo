@@ -1,12 +1,13 @@
 package controllers
 
 import (
-	"net/http"
-	u "github.com/AAGAraujo/angolar-todo/server/utils"
-	"github.com/AAGAraujo/angolar-todo/server/models"
 	"encoding/json"
-	"github.com/gorilla/mux"
+	"net/http"
 	"strconv"
+
+	"github.com/AAGAraujo/angolar-todo/server/models"
+	u "github.com/AAGAraujo/angolar-todo/server/utils"
+	"github.com/gorilla/mux"
 )
 
 var CreateUser = func(w http.ResponseWriter, r *http.Request) {
@@ -14,13 +15,16 @@ var CreateUser = func(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 	err := json.NewDecoder(r.Body).Decode(user) //decode the request body into struct and failed if any error occur
 	if err != nil {
-		u.Respond(w, u.Message(false, "Invalid request"))
+		u.Respond(w, u.Message(false, "Invalid request"), http.StatusBadRequest)
 		return
 	}
 
 	resp := user.Create() //Create account
-	w.WriteHeader(http.StatusCreated)
-	u.Respond(w, resp)
+	if resp["status"].(bool) {
+		u.Respond(w, resp, http.StatusCreated)
+	} else {
+		u.Respond(w, resp, http.StatusConflict)
+	}
 }
 
 var UpdateUser = func(w http.ResponseWriter, r *http.Request) {
@@ -28,14 +32,13 @@ var UpdateUser = func(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 	err := json.NewDecoder(r.Body).Decode(user) //decode the request body into struct and failed if any error occur
 	if err != nil {
-		u.Respond(w, u.Message(false, "Invalid request"))
+		u.Respond(w, u.Message(false, "Invalid request"), http.StatusBadRequest)
 		return
 	}
 
 	resp := user.Update()
 
-	w.WriteHeader(http.StatusAccepted)
-	u.Respond(w, resp)
+	u.Respond(w, resp, http.StatusAccepted)
 }
 
 var DeleteUser = func(w http.ResponseWriter, r *http.Request) {
@@ -43,24 +46,22 @@ var DeleteUser = func(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 	err := json.NewDecoder(r.Body).Decode(user) //decode the request body into struct and failed if any error occur
 	if err != nil {
-		u.Respond(w, u.Message(false, "Invalid request"))
+		u.Respond(w, u.Message(false, "Invalid request"), http.StatusBadRequest)
 		return
 	}
 
 	resp := user.Delete() //Create account
 
-	w.WriteHeader(http.StatusAccepted)
-	u.Respond(w, resp)
+	u.Respond(w, resp, http.StatusOK)
 }
 
 var GetUsers = func(w http.ResponseWriter, r *http.Request) {
-	
+
 	result := models.GetUsers()
 	response := u.Message(true, "success")
 	response["data"] = result
 
-	w.WriteHeader(http.StatusOK)
-	u.Respond(w, response)
+	u.Respond(w, response, http.StatusOK)
 
 }
 
@@ -70,7 +71,7 @@ var GetUser = func(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(params["id"])
 	if err != nil {
 		//The passed path parameter is not an integer
-		u.Respond(w, u.Message(false, "There was an error in your request"))
+		u.Respond(w, u.Message(false, "There was an error in your request"), http.StatusBadRequest)
 		return
 	}
 
@@ -78,9 +79,6 @@ var GetUser = func(w http.ResponseWriter, r *http.Request) {
 	response := u.Message(true, "success")
 	response["data"] = result
 
-	w.WriteHeader(http.StatusOK)
-	u.Respond(w, response)
-	
+	u.Respond(w, response, http.StatusOK)
+
 }
-
-
