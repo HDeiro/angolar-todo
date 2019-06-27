@@ -10,7 +10,7 @@ import { UserNewComponent } from '../views/pages/user/user-new/user-new.componen
 })
 export class RouteService {
 
-  private static routeList = [
+  static routeList = [
     {
       path: 'todo',
       component: TodoListComponent,
