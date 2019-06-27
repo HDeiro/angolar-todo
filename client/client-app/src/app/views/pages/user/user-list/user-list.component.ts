@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from 'src/app/services/api/user.service';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/components/dialog/confirmation-dialog/confirmation-dialog.component';
-import { LottieAnimationViewModule } from 'ng-lottie';
-import { animate } from '@angular/animations';
+import { UserService } from 'src/app/services/api/user/user.service';
 
 @Component({
   selector: 'app-user-list',
