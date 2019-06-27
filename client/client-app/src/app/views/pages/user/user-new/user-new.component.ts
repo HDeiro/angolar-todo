@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
+import { FormControl, Validators } from '@angular/forms';
+import { FormErrorMatcher } from 'src/app/utilities/form-error-matcher.util';
 
 @Component({
   selector: 'app-user-new',
@@ -10,6 +12,11 @@ export class UserNewComponent implements OnInit {
 
   passwordIsHidden = true;
   userModel: User;
+  matcher = new FormErrorMatcher();
+  formControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 
   constructor() { }
 

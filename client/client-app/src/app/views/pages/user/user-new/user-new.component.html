@@ -1,10 +1,14 @@
 <form class="container padding-content">
   <mat-form-field class="full-width">
     <input matInput 
-      placeholder="Nome" 
+      placeholder="Name" 
       required
       [(ngModel)]="userModel.name"
       name="name">
+
+      <mat-error *ngIf="formControl.hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
@@ -14,6 +18,10 @@
       [(ngModel)]="userModel.email"
       name="email"
       type="email">
+
+      <mat-error *ngIf="formControl.hasError('required')">
+        E-mail is <strong>required</strong>
+      </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
@@ -29,6 +37,10 @@
         (click)="passwordIsHidden = !passwordIsHidden">
         {{passwordIsHidden ? 'lock' : 'lock_open'}}
       </mat-icon>
+
+      <mat-error *ngIf="formControl.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
   </mat-form-field>
 
   <div class="actions" align="right">
