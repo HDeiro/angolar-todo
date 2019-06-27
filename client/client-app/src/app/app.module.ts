@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainModule } from './views/main/main.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/api/auth/auth.service';
 
 @NgModule({
   declarations: [
