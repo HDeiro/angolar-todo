@@ -84,7 +84,7 @@ func (user *User) Create() (map[string] interface{}) {
 	user.Password = "" //delete password
 
 	response := u.Message(true, "Account has been created")
-	response["user"] = user // email, nome, token, password =""
+	response["user"] = user 
 	return response
 }
 

@@ -50,10 +50,16 @@ Ready for go!!
 
 To install any of this package, open terminal and run
 
-go get github.com/{package-name}
+`go get github.com/{package-name}`
 
 ### How Use
 
-After all the process of install, you need go to the api folder and use this code
+After all the process of install, you need create database in postgresql
+
+`psql createdb angolar-todo`
+
+You need change .env file in project with the connection information of your database
+
+And go to the api folder and use this code
 
 `go run main.go`

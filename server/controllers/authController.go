@@ -17,5 +17,12 @@ var Authenticate = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp := models.Login(account.Email, account.Password)
+
+	if resp["status"] == true {
+		w.WriteHeader(http.StatusOK)
+	}else{
+		w.WriteHeader(http.StatusUnauthorized)
+	}
+
 	u.Respond(w, resp)
 }

@@ -19,6 +19,7 @@ var CreateUser = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp := user.Create() //Create account
+	w.WriteHeader(http.StatusCreated)
 	u.Respond(w, resp)
 }
 
@@ -32,6 +33,8 @@ var UpdateUser = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp := user.Update()
+
+	w.WriteHeader(http.StatusAccepted)
 	u.Respond(w, resp)
 }
 
@@ -45,6 +48,8 @@ var DeleteUser = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp := user.Delete() //Create account
+
+	w.WriteHeader(http.StatusAccepted)
 	u.Respond(w, resp)
 }
 
@@ -53,6 +58,8 @@ var GetUsers = func(w http.ResponseWriter, r *http.Request) {
 	result := models.GetUsers()
 	response := u.Message(true, "success")
 	response["data"] = result
+
+	w.WriteHeader(http.StatusOK)
 	u.Respond(w, response)
 
 }
@@ -70,6 +77,8 @@ var GetUser = func(w http.ResponseWriter, r *http.Request) {
 	result := models.GetUser(uint(id))
 	response := u.Message(true, "success")
 	response["data"] = result
+
+	w.WriteHeader(http.StatusOK)
 	u.Respond(w, response)
 	
 }

@@ -21,6 +21,8 @@ var CreateToDo = func(w http.ResponseWriter, r *http.Request){
 	}
 
 	resp := toDo.Create()
+
+	w.WriteHeader(http.StatusCreated)
 	u.Respond(w,resp)
 	
 }
@@ -37,6 +39,8 @@ var UpdateToDo = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp := toDo.Update()
+
+	w.WriteHeader(http.StatusAccepted)
 	u.Respond(w,resp)
 
 }
@@ -53,6 +57,8 @@ var DeleteToDo = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp := toDo.Delete()
+
+	w.WriteHeader(http.StatusAccepted)
 	u.Respond(w,resp)
 
 }
@@ -63,6 +69,8 @@ var GetToDos = func(w http.ResponseWriter, r *http.Request) {
 	result := models.GetToDos()
 	response := u.Message(true, "success")
 	response["data"] = result
+
+	w.WriteHeader(http.StatusOK)
 	u.Respond(w, response)
 	
 }
@@ -80,6 +88,8 @@ var GetToDo = func(w http.ResponseWriter, r *http.Request) {
 	result := models.GetToDo(uint(id))
 	response := u.Message(true, "success")
 	response["data"] = result
+
+	w.WriteHeader(http.StatusOK)
 	u.Respond(w, response)
 	
 }
