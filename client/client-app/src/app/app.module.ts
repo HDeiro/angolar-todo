@@ -3,16 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ConfirmationDialogComponent } from './components/dialog/confirmation-dialog/confirmation-dialog.component';
 import { MainModule } from './views/main/main.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmationDialogComponent,
-  ],
-  entryComponents: [
-    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
