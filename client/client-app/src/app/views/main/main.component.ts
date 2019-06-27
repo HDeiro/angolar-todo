@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { RouteService } from 'src/app/services/route.service';
 
 @Component({
   selector: 'app-main',
@@ -13,7 +12,10 @@ import { RouteService } from 'src/app/services/route.service';
 })
 export class MainComponent implements OnInit {
 
-  routes: Array<{label: string, path: string}>;
+  routes: Array<{label: string, path: string}> = [
+    {label: 'To dos', path: '/todo'},
+    {label: 'Users', path: '/user'},
+  ];
   filter = '';
   pageTitle = 'AnGolar';
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -26,8 +28,8 @@ export class MainComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit() {
-    this.router.events.subscribe(event => this.pageTitle = this.titleService.getTitle());
-    this.routes = RouteService.getMenuRoutes();
+    this.router.events.subscribe(() => 
+      this.pageTitle = this.titleService.getTitle());
   }
 
   getFilteredRoutes() {
