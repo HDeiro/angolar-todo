@@ -4,11 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 const routes : Routes = [
   {
     path: 'todo',
-    loadChildren: './views/pages/todo/todo.module#TodoModule'
+    loadChildren : () => import('./views/pages/todo/todo.module').then(module => module.TodoModule)
   },
   {
     path: 'user',
-    loadChildren: './views/pages/user/user.module#UserModule'
+    loadChildren : () => import('./views/pages/user/user.module').then(module => module.UserModule)
   }
 ];
 
