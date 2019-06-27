@@ -1,9 +1,14 @@
 <div class="padding-content">
   <mat-form-field class="full-width">
     <input matInput 
+      required
       placeholder="Title" 
       [(ngModel)]="todoModel.title"
       name="title">
+
+      <mat-error *ngIf="formControl.hasError('required')">
+        Title is <strong>required</strong>
+      </mat-error>
   </mat-form-field>
 
   <div [froalaEditor] [(froalaModel)]="todoModel.content"></div>

@@ -49,7 +49,12 @@
         <mat-label>Title</mat-label>
         <input matInput
           placeholder="Title"
+          required
           [(ngModel)]="editableModel.title">
+
+        <mat-error *ngIf="formControl.hasError('required')">
+          Title is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
 
       <div [froalaEditor] [(froalaModel)]="editableModel.content"></div>
