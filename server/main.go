@@ -1,12 +1,13 @@
 package main
 
 import (
-	"github.com/gorilla/mux"
-	"github.com/AAGAraujo/angolar-todo/server/app"
-	"github.com/AAGAraujo/angolar-todo/server/controllers"
-	"os"
 	"fmt"
 	"net/http"
+	"os"
+
+	"github.com/AAGAraujo/angolar-todo/server/app"
+	"github.com/AAGAraujo/angolar-todo/server/controllers"
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -20,6 +21,8 @@ func main() {
 	router.HandleFunc("/user", controllers.GetUsers).Methods("GET")
 	router.HandleFunc("/user/{id}", controllers.GetUser).Methods("GET")
 
+	router.HandleFunc("/token", controllers.RenewToken).Methods("GET")
+
 	router.HandleFunc("/login", controllers.Authenticate).Methods("POST")
 
 	router.HandleFunc("/todo", controllers.CreateToDo).Methods("POST")
@@ -28,7 +31,6 @@ func main() {
 	router.HandleFunc("/todo", controllers.UpdateToDo).Methods("PUT")
 	router.HandleFunc("/todo", controllers.DeleteToDo).Methods("DELETE")
 
-
 	port := os.Getenv("PORT") //Get port from .env file, we did not specify any port so this should return an empty string when tested locally
 	if port == "" {
 		port = "8000" //localhost
@@ -36,7 +38,7 @@ func main() {
 
 	fmt.Println(port)
 
-	err := http.ListenAndServe(":" + port, router) //Launch the app, visit localhost:8000/api
+	err := http.ListenAndServe(":"+port, router) //Launch the app, visit localhost:8000/api
 	if err != nil {
 		fmt.Print(err)
 	}

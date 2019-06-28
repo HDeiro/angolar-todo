@@ -1,8 +1,10 @@
 package app
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
+	"time"
 
 	//"strings"
 	"context"
@@ -65,10 +67,27 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 			u.Respond(w, response, http.StatusForbidden)
 			return
 		}
+		if getTokenRemainingValidity(tk.ExpirationTime) {
+			response = u.Message(false, "The token has expired")
+			u.Respond(w, response, http.StatusForbidden)
+			return
+		}
 
 		//Everything went well, proceed with the request and set the caller to the user retrieved from the parsed token
-		ctx := context.WithValue(r.Context(), "user", tk.UserId)
+		ctx := context.WithValue(r.Context(), "user", tk.UserID)
 		r = r.WithContext(ctx)
 		next.ServeHTTP(w, r) //proceed in the middleware chain!
 	})
+}
+
+func getTokenRemainingValidity(timeToken interface{}) bool {
+	if validity, ok := timeToken.(int64); ok {
+		tm := time.Unix(validity, 0)
+		remainer := tm.Sub(time.Now()).Seconds()
+		fmt.Printf("Remain time: %f", remainer)
+		if remainer > 0 {
+			return false
+		}
+	}
+	return true
 }

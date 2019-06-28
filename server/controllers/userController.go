@@ -57,7 +57,14 @@ var DeleteUser = func(w http.ResponseWriter, r *http.Request) {
 
 var GetUsers = func(w http.ResponseWriter, r *http.Request) {
 
-	result := models.GetUsers()
+	filters := &models.Filter{}
+	err := json.NewDecoder(r.Body).Decode(filters) //decode the request body into struct and failed if any error occur
+	if err != nil {
+		//log.Fatal(err)
+		filters = nil
+	}
+
+	result := models.GetUsers(filters)
 	response := u.Message(true, "success")
 	response["data"] = result
 

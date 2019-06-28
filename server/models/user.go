@@ -1,34 +1,37 @@
 package models
 
 import (
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+	"time"
+
+	u "github.com/AAGAraujo/angolar-todo/server/utils"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/jinzhu/gorm"
-	"strings"
-	u "github.com/AAGAraujo/angolar-todo/server/utils"
 	"golang.org/x/crypto/bcrypt"
-	"os"
-	"fmt"
 )
 
 /*
 JWT claims struct
 */
 type Token struct {
-	UserId uint
+	UserID         uint
+	ExpirationTime int64
 	jwt.StandardClaims
 }
 
 type User struct {
 	gorm.Model
-	Id			int    `json:id`
-	Name 		string `json:"name"`
-	Email 		string `json:"email"`
-	Password 	string `json:"password"`
-	Token       string `json:"token"`
+	Name     string `json:"name,omitempty"`
+	Email    string `json:"email,omitempty"`
+	Password string `json:"password,omitempty"`
+	Token    string `json:"token,omitempty"`
 }
 
 //Validate incoming user details...
-func (user *User) Validate() (map[string] interface{}, bool) {
+func (user *User) Validate() (map[string]interface{}, bool) {
 
 	if !strings.Contains(user.Email, "@") {
 		return u.Message(false, "Email address is required"), false
@@ -44,27 +47,30 @@ func (user *User) Validate() (map[string] interface{}, bool) {
 	//check for errors and duplicate emails
 	err := GetDB().Table("users").Where("email = ?", user.Email).First(temp).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
-		fmt.Printf("err = %s",err)
+		fmt.Printf("err = %s", err)
 		return u.Message(false, "Connection error. Please retry"), false
 	}
-	if temp.Email != "" && temp.Id != user.Id{
+	if temp.Email != "" && temp.ID != user.ID {
 		return u.Message(false, "Email address already in use by another user."), false
 	}
 
 	return u.Message(false, "Requirement passed"), true
 }
 
-func (user *User) generateToken(){
+func (user *User) GenerateToken() {
+
+	value, _ := strconv.Atoi(os.Getenv("token_exp"))
 
 	//Create new JWT token for the newly registered account
-	tk := &Token{UserId: user.ID}
+	tk := &Token{UserID: uint(user.ID), ExpirationTime: time.Now().Add(time.Duration(value) * time.Second).Unix()}
+
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
 	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
 	user.Token = tokenString
 
 }
 
-func (user *User) Create() (map[string] interface{}) {
+func (user *User) Create() map[string]interface{} {
 
 	if resp, ok := user.Validate(); !ok {
 		return resp
@@ -79,16 +85,16 @@ func (user *User) Create() (map[string] interface{}) {
 		return u.Message(false, "Failed to create account, connection error.")
 	}
 
-	user.generateToken();
+	user.GenerateToken()
 
 	user.Password = "" //delete password
 
 	response := u.Message(true, "Account has been created")
-	response["user"] = user 
+	response["user"] = user
 	return response
 }
 
-func Login(email, password string) (map[string]interface{}) {
+func Login(email, password string) map[string]interface{} {
 
 	user := &User{}
 	err := GetDB().Table("users").Where("email = ?", email).First(user).Error
@@ -106,7 +112,7 @@ func Login(email, password string) (map[string]interface{}) {
 	//Worked! Logged In
 	user.Password = ""
 
-	user.generateToken();
+	user.GenerateToken()
 
 	resp := u.Message(true, "Logged In")
 	resp["user"] = user
@@ -125,7 +131,7 @@ func GetUser(u uint) *User {
 	return user
 }
 
-func (user *User) Update() (map[string] interface{}) {
+func (user *User) Update() map[string]interface{} {
 
 	if resp, ok := user.Validate(); !ok {
 		return resp
@@ -140,30 +146,36 @@ func (user *User) Update() (map[string] interface{}) {
 		return u.Message(false, "Failed to update account, connection error.")
 	}
 
-	user.generateToken();
+	user.GenerateToken()
 
 	user.Password = "" //delete password
 
 	response := u.Message(true, "Account has been updated")
-	response["user"] = user 
+	response["user"] = user
 	return response
 }
 
-func (user *User) Delete() (map[string] interface{}) {
-	
+func (user *User) Delete() map[string]interface{} {
+
 	GetDB().Delete(user)
 
 	response := u.Message(true, "Account has been deleted")
-	response["user"] = user 
+	response["user"] = user
 	return response
 }
 
-
-func GetUsers() ([]*User) {
+func GetUsers(filters *Filter) []*User {
 
 	user := make([]*User, 0)
-	error := GetDB().Table("users").Find(&user).Error
-	if error != nil {
+	var err error
+
+	if filters != nil {
+		err = GetDB().Select(filters.Column).Find(&user).Error
+	} else {
+		err = GetDB().Table("users").Find(&user).Error
+	}
+
+	if err != nil {
 		return nil
 	}
 	return user

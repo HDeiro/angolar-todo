@@ -1,18 +1,16 @@
 package models
 
 import (
-	"time"
-
 	u "github.com/AAGAraujo/angolar-todo/server/utils"
+	"github.com/jinzhu/gorm"
 )
 
 type ToDo struct {
-	Id          int        `json:"id"`
-	Title       string     `json:"title"`
-	Description string     `json:"description"`
-	UserId      int        `json:"user_id"`
-	CreateAt    *time.Time `json:"create_at"`
-	IsPrivate   bool       `json:"is_private"`
+	gorm.Model
+	Title       string `json:"title,omitempty"`
+	Description string `json:"description,omitempty"`
+	UserID      int    `json:"user_id,omitempty"`
+	IsPrivate   bool   `json:"is_private,omitempty"`
 }
 
 func (toDo *ToDo) Validate() (map[string]interface{}, bool) {
@@ -25,7 +23,7 @@ func (toDo *ToDo) Validate() (map[string]interface{}, bool) {
 		return u.Message(false, "Description is required field!"), false
 	}
 	//fmt.Printf("user : %d\n",toDo.UserId)
-	if toDo.UserId == 0 {
+	if toDo.UserID == 0 {
 		return u.Message(false, "User is required field!"), false
 	}
 
