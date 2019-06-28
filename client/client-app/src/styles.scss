@@ -56,6 +56,15 @@ mat-card-title, mat-card-footer {
   color: $danger-color;
 }
 
+.theme-color {
+  color: $theme-color;
+}
+
+//Text utilitaries
+.text-center {
+  text-align: center;
+}
+
 .not-found {
   overflow: hidden;
 
