@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSidenavModule, MatToolbarModule, MatListModule, MatIconModule, MatMenuModule, MatButtonModule } from '@angular/material';
+import { MatSidenavModule, MatToolbarModule, MatListModule, MatIconModule, MatMenuModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
 import { EnsureModule } from 'src/app/pipes/ensure/ensure.module';
 import { MainComponent } from './main.component';
 import { FormsModule } from '@angular/forms';
@@ -19,6 +19,7 @@ import { ProfileComponentModule } from 'src/app/components/profile/profile.compo
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
+    MatSnackBarModule,
     MatIconModule,
     MatMenuModule,
     CommonModule,
