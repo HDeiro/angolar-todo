@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { MainModule } from './views/main/main.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginModule } from './views/login/login.module';
-import { SocialLoginModule, AuthServiceConfig, LinkedInLoginProvider } from "angularx-social-login";
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 
 let config = new AuthServiceConfig([
