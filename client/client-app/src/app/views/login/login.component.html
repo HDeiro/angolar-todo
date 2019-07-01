@@ -66,13 +66,16 @@
             </svg>
           </button>
 
-          <button mat-icon-button>
+          <button mat-icon-button (click)="authService.doLoginWithFacebook()">
             <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
               <g>
                 <title>Facebook</title>
                 <path stroke="null" id="f_1_" fill="#3B5998" d="m18.332446,31.325843l0,-13.410113l5.597871,0l0.932979,-5.747191l-6.53085,0l0,-2.873596c0,-1.91573 0.934844,-2.873596 2.798936,-2.873596l2.798936,0l0,-5.747191c-0.932979,0 -3.02285,0 -4.664893,0c-4.664893,0 -6.53085,2.873596 -6.53085,7.662921l0,3.831461l-5.597871,0l0,5.747191l5.597871,0l0,13.410113l5.597871,0z"/>
               </g>
             </svg>
+          </button>
+
+          <button mat-icon-button (click)="authService.doLoginWithLinkedIn()">
           </button>
         </div>
 

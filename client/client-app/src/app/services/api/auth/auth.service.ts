@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { ObjectUtils } from 'src/app/utilities/object-utils.util';
-import { AuthService as SocialAuthService } from "angularx-social-login";
+import { AuthService as SocialAuthService, LinkedInLoginProvider } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
  
 
@@ -27,6 +27,9 @@ export class AuthService {
       if(user.provider == 'GOOGLE') {
         this.userData.googlePhotoUrl = user.photoUrl;
         this.userData.googleUserId = user.id;
+      } else if (user.provider == 'FACEBOOK') {
+        this.userData.facebookPhotoUrl = user.photoUrl;
+        this.userData.facebookUserId = user.id;
       }
 
       localStorage.setItem(this.LOCALSTORAGE_USER_KEY, JSON.stringify(this.userData));
@@ -51,6 +54,10 @@ export class AuthService {
 
   doLoginWithFacebook(){
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  doLoginWithLinkedIn(){
+    this.socialAuthService.signIn(LinkedInLoginProvider.PROVIDER_ID);
   }
 
   doLogin(userToLogin: User): boolean {

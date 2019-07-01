@@ -6,4 +6,7 @@ export class User {
     createdAt: Date;
     googlePhotoUrl: string;
     googleUserId: string;
+    facebookPhotoUrl: string;
+    facebookUserId: string;
+    
 }
