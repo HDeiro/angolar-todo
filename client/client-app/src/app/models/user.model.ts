@@ -1,7 +1,9 @@
 export class User {
 
-    name: string = null;
-    email: string = null;
-    createdAt: Date = null;
-
+    name: string;
+    email: string;
+    password: string;
+    createdAt: Date;
+    googlePhotoUrl: string;
+    googleUserId: string;
 }

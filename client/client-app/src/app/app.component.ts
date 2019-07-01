@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute, NavigationEnd, RouterEvent } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
+import { AuthService } from './services/api/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private titleService: Title
+    private titleService: Title,
+    protected authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -22,9 +24,8 @@ export class AppComponent implements OnInit {
       filter(event => event instanceof NavigationEnd),
       map(() => this.activatedRoute),
       map(route => {
-        while (route.firstChild) {
+        while (route.firstChild)
           route = route.firstChild;
-        }
         return route;
       }),
       filter(route => route.outlet === 'primary'),

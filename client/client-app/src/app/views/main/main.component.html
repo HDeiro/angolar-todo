@@ -22,6 +22,14 @@
         {{route.label}}
       </a>
     </mat-nav-list>
+
+    <mat-nav-list>
+      <a class="menu-item"
+        (click)="authService.doLogout()"
+        mat-list-item>
+        Logout
+      </a>
+    </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
