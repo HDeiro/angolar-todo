@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
-import { map } from 'rxjs/operators';
+import { map, filter, find } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -19,6 +19,14 @@ export class UserService {
         return user;
       }))
     );
+  }
+
+  getUser(id:number): User {
+    let user = new User();
+    user.id = id;
+    user.name = "Hugo Deiró";
+    user.email = "hugodeiro@gmail.com";
+    return user;
   }
 
   async deleteUser(user: User) {

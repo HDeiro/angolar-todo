@@ -21,6 +21,7 @@ export class AuthService {
       if(!user) return;
 
       this.userData = new User();
+      this.userData.id = Date.now();
       this.userData.name = user.name;
       this.userData.email = user.email;
 
