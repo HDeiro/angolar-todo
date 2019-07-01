@@ -56,10 +56,6 @@ export class AuthService {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
-  doLoginWithLinkedIn(){
-    this.socialAuthService.signIn(LinkedInLoginProvider.PROVIDER_ID);
-  }
-
   doLogin(userToLogin: User): boolean {
     this.userData = userToLogin;
     this.isUserAuthenticated = true;
