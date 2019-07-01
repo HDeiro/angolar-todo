@@ -34,15 +34,21 @@
 
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span [innerHTML]="pageTitle || 'AnGolar' | ensure: 'html'"></span>
+      <div class="left">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span [innerHTML]="pageTitle || 'AnGolar' | ensure: 'html'"></span>
+      </div>
+
+      <div class="right">
+        <app-profile></app-profile>
+      </div>
     </mat-toolbar>
 
     <router-outlet></router-outlet>

@@ -10,4 +10,7 @@ export class User {
     facebookPhotoUrl: string;
     facebookUserId: string;
     
+    getProfilePhoto() {
+        return this.googlePhotoUrl || this.facebookPhotoUrl
+    }
 }

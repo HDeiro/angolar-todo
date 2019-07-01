@@ -6,6 +6,7 @@ import { MainComponent } from './main.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileComponentModule } from 'src/app/components/profile/profile.component.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserAnimationsModule,
+    ProfileComponentModule,
     FormsModule,
     MatSidenavModule,
     MatToolbarModule,

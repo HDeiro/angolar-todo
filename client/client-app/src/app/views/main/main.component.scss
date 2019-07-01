@@ -1,6 +1,14 @@
 @import '../../../styles/placeholders';
 @import '../../../styles/constants';
 
+mat-toolbar {
+  @extend %display-flex-aic-jcsb;
+
+  .left {
+    @extend %display-flex-aic-jcc;
+  }
+}
+
 mat-nav-list {
   padding-top: 0;
 }
