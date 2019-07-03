@@ -1,3 +1,32 @@
 <div class="padding-content">
   <h1 class="title">Home</h1>
+
+  <agm-map [zoom]="zoom" 
+    [latitude]="userLocation.latitude" 
+    [longitude]="userLocation.longitude">
+    <agm-marker-cluster imagePath="assets/images/agm-cluster/m">
+      <!-- <agm-marker 
+        *ngFor="let marker of userMarkers"
+        [latitude]="marker.latitude" 
+        [longitude]="marker.longitude"
+        [iconUrl]="marker.iconUrl"
+        [title]="marker.title">
+        <agm-info-window [disableAutoPan]="true">
+          <h4>{{marker.title}}</h4>
+          <p>{{marker.content}}</p>
+        </agm-info-window>
+      </agm-marker> -->
+      <agm-overlay
+        *ngFor="let marker of userMarkers"
+        [latitude]="marker.latitude" 
+        [longitude]="marker.longitude">
+        <div [ngStyle]="overlayBaseStyle.body">
+          <img [src]="marker.iconUrl" alt="Ícone" style="margin-right: 3px">
+          <strong>Overlay</strong>
+          <div [ngStyle]="overlayBaseStyle.triangleShadow"></div>
+          <div [ngStyle]="overlayBaseStyle.triangle"></div>
+        </div>
+      </agm-overlay>
+    </agm-marker-cluster>
+  </agm-map>
 </div>

@@ -34,7 +34,7 @@ export function provideConfig() {
     AppRoutingModule,
     LoginModule,
     MainModule,
-    SocialLoginModule
+    SocialLoginModule,
   ],
   bootstrap: [
     AppComponent

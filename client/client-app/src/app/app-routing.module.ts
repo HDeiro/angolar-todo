@@ -6,7 +6,7 @@ const routes : Routes = [
   {
     path: '',
     loadChildren : () => import('./views/pages/dashboard-home/dashboard-home.module').then(module => module.DashboardHomeModule),
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'todo',
@@ -17,7 +17,7 @@ const routes : Routes = [
     path: 'user',
     loadChildren : () => import('./views/pages/user/user.module').then(module => module.UserModule),
     canActivate: [AuthGuard]
-  }
+  },
 ];
 
 @NgModule({
