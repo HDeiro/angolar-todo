@@ -17,7 +17,7 @@ var Authenticate = func(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := models.Login(user.Email, user.Password)
+	resp := models.Login(user.Email, user.Password, user.GoogleUserID, user.FacebookUserID)
 
 	u.Respond(w, resp, http.StatusOK)
 }

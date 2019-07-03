@@ -23,12 +23,25 @@ Remove any config file from golang
 sudo rm -rf /usr/lib/go-1.6/ /usr/lib/go-1.6/src/ /usr/lib/go-1.6/src/runtime/ /usr/lib/go-1.6/src/runtime/race
 ```
 Download the last version of golang
+
+x64
 ```
 curl -O https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz
 ```
-Unzip 
+x32
 ```
-sudo tar -C /usr/local -xzf go1.11.1.linux-amd64.tar.gz
+curl -O https://dl.google.com/go/go1.12.6.linux-386.tar.gz
+```
+
+Unzip 
+
+x64
+```
+sudo tar -C /usr/local -xzf go1.12.6.linux-amd64.tar.gz
+```
+x32
+```
+sudo tar -C /usr/local -xzf go1.12.6.linux-amd64.tar.gz
 ```
 Create folder /go, some ambient variables and storage this data in a bash file
 ```

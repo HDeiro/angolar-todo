@@ -24,10 +24,14 @@ type Token struct {
 
 type User struct {
 	gorm.Model
-	Name     string `json:"name,omitempty"`
-	Email    string `json:"email,omitempty"`
-	Password string `json:"password,omitempty"`
-	Token    string `json:"token,omitempty"`
+	Name             string `json:"name,omitempty"`
+	Email            string `json:"email,omitempty"`
+	Password         string `json:"password,omitempty"`
+	Token            string `json:"token,omitempty"`
+	GooglePhotoURL   string `json:"google_photo_url,omitempty"`
+	GoogleUserID     string `json:"google_user_id,omitempty"`
+	FacebookPhotoURL string `json:"facebook_photo_url,omitempty"`
+	FacebookUserID   string `json:"facebook_user_id,omitempty"`
 }
 
 //Validate incoming user details...
@@ -37,7 +41,7 @@ func (user *User) Validate() (map[string]interface{}, bool) {
 		return u.Message(false, "Email address is required"), false
 	}
 
-	if len(user.Password) < 6 {
+	if len(user.Password) < 6 && user.GoogleUserID == "" && user.FacebookUserID == "" {
 		return u.Message(false, "Password is required"), false
 	}
 
@@ -50,7 +54,7 @@ func (user *User) Validate() (map[string]interface{}, bool) {
 		fmt.Printf("err = %s", err)
 		return u.Message(false, "Connection error. Please retry"), false
 	}
-	if temp.Email != "" && temp.ID != user.ID {
+	if temp.Email != "" {
 		return u.Message(false, "Email address already in use by another user."), false
 	}
 
@@ -76,8 +80,10 @@ func (user *User) Create() map[string]interface{} {
 		return resp
 	}
 
-	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
-	user.Password = string(hashedPassword)
+	if user.Password != "" {
+		hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+		user.Password = string(hashedPassword)
+	}
 
 	GetDB().Create(user)
 
@@ -88,13 +94,15 @@ func (user *User) Create() map[string]interface{} {
 	user.GenerateToken()
 
 	user.Password = "" //delete password
+	user.GoogleUserID = ""
+	user.FacebookUserID = ""
 
 	response := u.Message(true, "Account has been created")
 	response["user"] = user
 	return response
 }
 
-func Login(email, password string) map[string]interface{} {
+func Login(email, password, googleUserID, facebookUserID string) map[string]interface{} {
 
 	user := &User{}
 	err := GetDB().Table("users").Where("email = ?", email).First(user).Error
@@ -105,12 +113,25 @@ func Login(email, password string) map[string]interface{} {
 		return u.Message(false, "Connection error. Please retry")
 	}
 
-	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
-	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword { //Password does not match!
-		return u.Message(false, "Invalid login credentials. Please try again")
+	if password != "" {
+		err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+		if err != nil && err == bcrypt.ErrMismatchedHashAndPassword { //Password does not match!
+			return u.Message(false, "Invalid login credentials. Please try again")
+		}
+	} else if googleUserID != "" {
+		if user.GoogleUserID != googleUserID {
+			return u.Message(false, "Invalid login credentials. Please try again")
+		}
+	} else {
+		if user.FacebookUserID != facebookUserID {
+			return u.Message(false, "Invalid login credentials. Please try again")
+		}
 	}
+
 	//Worked! Logged In
 	user.Password = ""
+	user.FacebookUserID = ""
+	user.GoogleUserID = ""
 
 	user.GenerateToken()
 
@@ -128,6 +149,8 @@ func GetUser(u uint) *User {
 	}
 
 	user.Password = ""
+	user.FacebookUserID = ""
+	user.GoogleUserID = ""
 	return user
 }
 
@@ -149,6 +172,8 @@ func (user *User) Update() map[string]interface{} {
 	user.GenerateToken()
 
 	user.Password = "" //delete password
+	user.FacebookUserID = ""
+	user.GoogleUserID = ""
 
 	response := u.Message(true, "Account has been updated")
 	response["user"] = user
@@ -172,7 +197,7 @@ func GetUsers(filters *Filter) []*User {
 	if filters != nil {
 		err = GetDB().Select(filters.Column).Find(&user).Error
 	} else {
-		err = GetDB().Table("users").Find(&user).Error
+		err = GetDB().Select([]string{"id", "name", "email", "google_photo_url", "facebook_photo_url"}).Find(&user).Error
 	}
 
 	if err != nil {
