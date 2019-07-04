@@ -6,7 +6,6 @@ import (
 	"strings"
 	"time"
 
-	//"strings"
 	"context"
 	"os"
 
@@ -15,6 +14,13 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
+type key string
+
+const (
+	userID key = "user"
+)
+
+// JwtAuthentication is responsable for validate JWT token
 var JwtAuthentication = func(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -67,6 +73,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 			u.Respond(w, response, http.StatusForbidden)
 			return
 		}
+
 		if getTokenRemainingValidity(tk.ExpirationTime) {
 			response = u.Message(false, "The token has expired")
 			u.Respond(w, response, http.StatusForbidden)
@@ -74,7 +81,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 		}
 
 		//Everything went well, proceed with the request and set the caller to the user retrieved from the parsed token
-		ctx := context.WithValue(r.Context(), "user", tk.UserID)
+		ctx := context.WithValue(r.Context(), userID, tk.UserID)
 		r = r.WithContext(ctx)
 		next.ServeHTTP(w, r) //proceed in the middleware chain!
 	})

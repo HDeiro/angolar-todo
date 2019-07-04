@@ -10,6 +10,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// CreateToDo is responsable for create a to do
 var CreateToDo = func(w http.ResponseWriter, r *http.Request) {
 
 	toDo := &models.ToDo{}
@@ -27,6 +28,7 @@ var CreateToDo = func(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// UpdateToDo is responsable for update a to do
 var UpdateToDo = func(w http.ResponseWriter, r *http.Request) {
 
 	toDo := &models.ToDo{}
@@ -44,6 +46,7 @@ var UpdateToDo = func(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// DeleteToDo is responsable for delete a to do
 var DeleteToDo = func(w http.ResponseWriter, r *http.Request) {
 
 	toDo := &models.ToDo{}
@@ -61,6 +64,7 @@ var DeleteToDo = func(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// GetToDos return a list of to Dos
 var GetToDos = func(w http.ResponseWriter, r *http.Request) {
 
 	result := models.GetToDos()
@@ -71,6 +75,7 @@ var GetToDos = func(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// GetToDo return a to Dos based on id
 var GetToDo = func(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)

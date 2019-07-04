@@ -10,6 +10,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// CreateUser is responsable for create a user
 var CreateUser = func(w http.ResponseWriter, r *http.Request) {
 
 	user := &models.User{}
@@ -27,6 +28,7 @@ var CreateUser = func(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// UpdateUser is responsable for update a user
 var UpdateUser = func(w http.ResponseWriter, r *http.Request) {
 
 	user := &models.User{}
@@ -41,6 +43,7 @@ var UpdateUser = func(w http.ResponseWriter, r *http.Request) {
 	u.Respond(w, resp, http.StatusAccepted)
 }
 
+// DeleteUser is responsable for delete a user
 var DeleteUser = func(w http.ResponseWriter, r *http.Request) {
 
 	user := &models.User{}
@@ -55,6 +58,7 @@ var DeleteUser = func(w http.ResponseWriter, r *http.Request) {
 	u.Respond(w, resp, http.StatusOK)
 }
 
+// GetUsers return a list of users
 var GetUsers = func(w http.ResponseWriter, r *http.Request) {
 
 	filters := &models.Filter{}
@@ -72,6 +76,7 @@ var GetUsers = func(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// GetUser return a user based on id
 var GetUser = func(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)

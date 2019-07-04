@@ -8,6 +8,7 @@ import (
 	u "github.com/AAGAraujo/angolar-todo/server/utils"
 )
 
+// Authenticate is responsible for managing system login
 var Authenticate = func(w http.ResponseWriter, r *http.Request) {
 
 	user := &models.User{}
@@ -22,6 +23,7 @@ var Authenticate = func(w http.ResponseWriter, r *http.Request) {
 	u.Respond(w, resp, http.StatusOK)
 }
 
+// RenewToken check the old token and if is valid return a new token
 var RenewToken = func(w http.ResponseWriter, r *http.Request) {
 
 	if userID := r.Context().Value("user"); userID != nil {

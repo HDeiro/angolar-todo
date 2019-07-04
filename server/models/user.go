@@ -13,15 +13,14 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-/*
-JWT claims struct
-*/
+// Token JWT claims struct
 type Token struct {
 	UserID         uint
 	ExpirationTime int64
 	jwt.StandardClaims
 }
 
+// User base struct for user
 type User struct {
 	gorm.Model
 	Name             string `json:"name,omitempty"`
@@ -61,6 +60,7 @@ func (user *User) Validate() (map[string]interface{}, bool) {
 	return u.Message(false, "Requirement passed"), true
 }
 
+// GenerateToken for login and create user and renew token
 func (user *User) GenerateToken() {
 
 	value, _ := strconv.Atoi(os.Getenv("token_exp"))
@@ -74,6 +74,7 @@ func (user *User) GenerateToken() {
 
 }
 
+// Create a user
 func (user *User) Create() map[string]interface{} {
 
 	if resp, ok := user.Validate(); !ok {
@@ -102,6 +103,7 @@ func (user *User) Create() map[string]interface{} {
 	return response
 }
 
+// Login a user
 func Login(email, password, googleUserID, facebookUserID string) map[string]interface{} {
 
 	user := &User{}
@@ -140,6 +142,7 @@ func Login(email, password, googleUserID, facebookUserID string) map[string]inte
 	return resp
 }
 
+// GetUser base on id
 func GetUser(u uint) *User {
 
 	user := &User{}
@@ -154,6 +157,7 @@ func GetUser(u uint) *User {
 	return user
 }
 
+// Update user
 func (user *User) Update() map[string]interface{} {
 
 	if resp, ok := user.Validate(); !ok {
@@ -180,6 +184,7 @@ func (user *User) Update() map[string]interface{} {
 	return response
 }
 
+// Delete user
 func (user *User) Delete() map[string]interface{} {
 
 	GetDB().Delete(user)
@@ -189,6 +194,7 @@ func (user *User) Delete() map[string]interface{} {
 	return response
 }
 
+// GetUsers return a list of users
 func GetUsers(filters *Filter) []*User {
 
 	user := make([]*User, 0)

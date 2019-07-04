@@ -5,6 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// ToDo base to Do definition
 type ToDo struct {
 	gorm.Model
 	Title       string `json:"title,omitempty"`
@@ -13,6 +14,7 @@ type ToDo struct {
 	IsPrivate   bool   `json:"is_private,omitempty"`
 }
 
+// Validate check if all required filds are ok
 func (toDo *ToDo) Validate() (map[string]interface{}, bool) {
 	//fmt.Printf("Title : %s\n",toDo.Title)
 	if toDo.Title == "" {
@@ -30,6 +32,7 @@ func (toDo *ToDo) Validate() (map[string]interface{}, bool) {
 	return u.Message(true, "sucess"), true
 }
 
+// Create a to Do
 func (toDo *ToDo) Create() map[string]interface{} {
 
 	if result, status := toDo.Validate(); !status {
@@ -43,6 +46,7 @@ func (toDo *ToDo) Create() map[string]interface{} {
 	return response
 }
 
+// Delete a to Do
 func (toDo *ToDo) Delete() map[string]interface{} {
 
 	GetDB().Delete(toDo)
@@ -52,6 +56,7 @@ func (toDo *ToDo) Delete() map[string]interface{} {
 	return response
 }
 
+// Update a to Do
 func (toDo *ToDo) Update() map[string]interface{} {
 
 	GetDB().Update(toDo)
@@ -61,6 +66,7 @@ func (toDo *ToDo) Update() map[string]interface{} {
 	return response
 }
 
+// GetToDo based on id
 func GetToDo(id uint) *ToDo {
 
 	toDo := &ToDo{}
@@ -71,6 +77,7 @@ func GetToDo(id uint) *ToDo {
 	return toDo
 }
 
+// GetToDos return a list of to Dos
 func GetToDos() []*ToDo {
 
 	toDos := make([]*ToDo, 0)
