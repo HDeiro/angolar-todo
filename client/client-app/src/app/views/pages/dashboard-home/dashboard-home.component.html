@@ -1,11 +1,42 @@
 <div class="padding-content">
   <h1 class="title">Home</h1>
+  
+  <mat-checkbox class="primary" 
+    [(ngModel)]="isShowingSavings"
+    (change)="updateModel()">
+    Show potential savings
+  </mat-checkbox>
 
+  <div class="chartjs">
+    <div class="chartjs-wrapper" style="position: relative">
+      <chart style="height: 220px"
+        #chartComponent
+        id="chartjs-canvas"
+        [type]="chart.type" 
+        [data]="chart.data" 
+        [options]="chart.options">
+      </chart>
+      <div id="medir" style="position: absolute"></div>
+      <div class="chartjs-tooltip" id="chartjs-tooltip"></div>
+    </div>
+    <ul class="chartjs-legend">
+      <li *ngFor="let legend of chart.data.datasets">
+        <span class="chartjs-legend-color" 
+          [ngStyle]="{'background-color': legend.backgroundColor}">
+        </span>
+        <span class="chartjs-legend-label">
+          {{legend.label}}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+<!--
   <agm-map [zoom]="zoom" 
     [latitude]="userLocation.latitude" 
     [longitude]="userLocation.longitude">
     <agm-marker-cluster imagePath="assets/images/agm-cluster/m">
-      <!-- <agm-marker 
+      <!-# <agm-marker 
         *ngFor="let marker of userMarkers"
         [latitude]="marker.latitude" 
         [longitude]="marker.longitude"
@@ -15,18 +46,17 @@
           <h4>{{marker.title}}</h4>
           <p>{{marker.content}}</p>
         </agm-info-window>
-      </agm-marker> -->
+      </agm-marker> #->
       <agm-overlay
         *ngFor="let marker of userMarkers"
         [latitude]="marker.latitude" 
         [longitude]="marker.longitude">
         <div [ngStyle]="overlayBaseStyle.body">
-          <img [src]="marker.iconUrl" alt="Ícone" style="margin-right: 3px">
-          <strong>Overlay</strong>
+          <img [src]="marker.iconUrl" alt="Ícone">
           <div [ngStyle]="overlayBaseStyle.triangleShadow"></div>
           <div [ngStyle]="overlayBaseStyle.triangle"></div>
         </div>
       </agm-overlay>
     </agm-marker-cluster>
-  </agm-map>
+  </agm-map>-->
 </div>

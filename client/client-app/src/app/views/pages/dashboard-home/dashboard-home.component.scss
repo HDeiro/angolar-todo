@@ -1,12 +1,65 @@
 agm-map {
-    width: 100%;
-    height: 500px;
+    width: 700px;
+    height: 300px;
 }
 
-.triangle {
-  width: 0; 
-  height: 0; 
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid #f00;
+.chartjs {
+  position: relative;
+  
+  &-legend {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-right: 80px;
+    }
+
+    &-color {
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 100%;
+      margin-right: 8px;
+    }
+
+    &-label {
+      font-size: 12px;
+      color: #2D3033;
+    }
+  }
+
+  &-tooltip {
+    z-index: 2;
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 12px;
+    box-shadow: 2px 3px 8px rgba(0,16,34,0.2);
+    padding: 8px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 165px;
+    pointer-events: none;
+    opacity: 0;
+
+    &:before {
+      content:' ';
+      width: 0; 
+      height: 0; 
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid white;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
 }
